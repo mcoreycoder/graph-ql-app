@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
+// import Dogs from './Dogs'
+
+
 
 const ADD_DOG = gql`
   mutation CreateDog($breed: String!, $age: Int!){
@@ -11,26 +14,44 @@ const ADD_DOG = gql`
   }}
 `;
 
-const NewDog = () => (
-  <Mutation mutation={ADD_DOG}>
-    {(addDog, { data }) => {
+const NewDog = () => {
+  const [breed, setBreed] = useState("")
+  const [age, setAge] = useState(0)
+
+  // console.log("age", age)
+  return (
+    <Mutation mutation={ADD_DOG}>
+      {(addDog, { data }) => {
 
 
-      return (
-        <form onSubmit={e=> {
-          e.preventDefault()
-          addDog({ variables: { breed: 'Peachy', age: 33 } })
+        return (
+          <form onSubmit={async(e) => {
+            e.preventDefault()
+            await addDog({ variables: { breed: breed, age: parseInt(age) } })
+            await window.location.replace("/");
+            // await ;
           }}>
-          <input>
-          </input>
-          <button type="submit">Submit It</button>
-        </form>
+            <input
+              type="text"
+              placeholder="Breed"
+              value={breed}
+              onChange={e => setBreed(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Age"
+              onChange={e => setAge(e.target.value)}
+            />
+
+            <button type="submit">Submit It</button>
+          </form>
         )
-    }}
+      }}
 
 
 
-  </Mutation>
-)
+    </Mutation>
+  )
+}
 
 export default NewDog
