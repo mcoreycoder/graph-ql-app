@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
-// import Dogs from './Dogs'
-
-
 
 const ADD_DOG = gql`
   mutation CreateDog($breed: String!, $age: Int!){
   addDog(breed: $breed, age: $age){
     breed
-    id
     age
+    id
   }}
 `;
 

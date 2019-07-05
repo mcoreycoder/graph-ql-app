@@ -6,8 +6,9 @@ import NewDog from './components/AddDog'
 function App() {
   return (
     <div className="App">
-      <Dogs onDogSelected = {e => console.log("event", e)}/>
-      <NewDog onDogSelected = {e => console.log(e)}/>
+      <NewDog onDogSelected={e => console.log(e)} />
+      <hr/>
+      <Dogs onDogSelected={e => console.log("event", e)} />
     </div>
   );
 }

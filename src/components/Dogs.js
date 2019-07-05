@@ -1,6 +1,8 @@
 import React from 'react';
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import DogGone from "./DeleteDog"
+import UpdateDog from "./UpdateDog"
 
 const GET_DOGS = gql`
   {
@@ -22,13 +24,13 @@ const Dogs = ({ onDogSelected }) => (
 
       return (
         <>
-        <select name="dog" onChange={onDogSelected}>
+        {/* <select name="dog" onChange={onDogSelected}>
           {data.dogs.map(dog => (
             <option key={dog.id} value={dog.breed}>
               {dog.breed}
             </option>
           ))}
-        </select>
+        </select> */}
 
         {data.dogs.map(dog => (
             <li key={dog.id} value={dog.breed}>
@@ -38,6 +40,8 @@ const Dogs = ({ onDogSelected }) => (
               <br/>
               ID: {dog.id}
               <br/>
+              <DogGone id={dog.id}/>
+              <UpdateDog id={dog.id}/>
             </li>
           ))}
 
